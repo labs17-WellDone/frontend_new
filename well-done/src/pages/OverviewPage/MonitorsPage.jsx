@@ -20,7 +20,7 @@ const MonitorsPage = ({ history }) => {
 
   useEffect(() => {
     AxiosWithAuth()
-      .get("https://welldone-db.herokuapp.com/api/sensors/recent")
+      .get("https://welldone-server.herokuapp.com/api/sensors/recent")
       .then(res => {
         setPumpData(res.data);
         setFuncPumps(res.data.filter(pump => pump.status === 2));

@@ -24,7 +24,7 @@ const EditNameForm = props => {
       alert("New name information must match");
 
       axiosWithAuth()
-        .get("https://welldone-db.herokuapp.com/api/accounts/")
+        .get("https://welldone-server.herokuapp.com/api/accounts/")
         .then(res => {
           console.log("res", res.data);
         })
@@ -41,7 +41,7 @@ const EditNameForm = props => {
 
   async function isValidUserCredential(account) {
     axiosWithAuth()
-      .post("https://welldone-db.herokuapp.com/api/auth/login", account)
+      .post("https://welldone-server.herokuapp.com/api/auth/login", account)
       .then(res => {
         console.log("res", res.data);
         getUserData(res.data.id);
@@ -56,7 +56,7 @@ const EditNameForm = props => {
 
   const getUserData = accountID => {
     axiosWithAuth()
-      .get("https://welldone-db.herokuapp.com/api/accounts/" + accountID)
+      .get("https://welldone-server.herokuapp.com/api/accounts/" + accountID)
       .then(res => {
         console.log("res", res.data);
         var temp = res.data;
@@ -75,7 +75,7 @@ const EditNameForm = props => {
     console.log(newData, accountID);
     axiosWithAuth()
       .put(
-        "https://welldone-db.herokuapp.com/api/accounts/" + accountID,
+        "https://welldone-server.herokuapp.com/api/accounts/" + accountID,
         newData
       )
       .then(res => {

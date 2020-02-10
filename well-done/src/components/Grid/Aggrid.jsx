@@ -99,7 +99,7 @@ class Grid extends Component {
   componentDidMount = () => {
     const token = localStorage.getItem("token");
     console.log(token);
-    fetch("https://welldone-db.herokuapp.com/api/sensors/recent", {
+    fetch("https://welldone-server.herokuapp.com/api/sensors/recent", {
       method: "GET",
       mode: "cors",
       headers: {
