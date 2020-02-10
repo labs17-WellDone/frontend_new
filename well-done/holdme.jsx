@@ -12,7 +12,7 @@ const PopupInfo = props => {
   useEffect(() => {
     AxiosWithAuth()
       .get(
-        `https://welldone-db.herokuapp.com/api/sensors/recent/sensor_id/${props.selectedPump.sensor_pid}`
+        `https://welldone-server.herokuapp.com/api/sensors/recent/sensor_id/${props.selectedPump.sensor_pid}`
       )
       .then(res => {
         console.log("get recent status", res.data);
@@ -353,7 +353,7 @@ const SignIn = props => {
     event.preventDefault();
     console.log("submit", account);
     axios
-      .post("https://welldone-db.herokuapp.com/api/auth/login", account)
+      .post("https://welldone-server.herokuapp.com/api/auth/login", account)
       .then(res => {
         console.log("res", res.data);
         localStorage.setItem("token", res.data.token);

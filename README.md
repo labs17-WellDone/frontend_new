@@ -1,7 +1,7 @@
 # WellDone Dashboard
 
 You can find the deployed project at https://well-done.welldone.now.sh/.
-<br> Backend is deployed at https://welldone-db.herokuapp.com/ 
+<br> Backend is deployed at https://welldone-server.herokuapp.com/ 
 
 ## Table of Contents
 - [Contributors](https://github.com/labs17-WellDone/frontend_new/tree/mini-master#contributors)
