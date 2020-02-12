@@ -31,12 +31,15 @@ const SignIn = props => {
   };
 
   return (
-    <Row>
-      <Col span={24} offset={3} style={{ marginBottom: "20px" }}>
-        <Title>Sign In</Title>
+    <Row className="signIn">
+      <Col span={24} style={{ marginBottom: "20px" , marginLeft: "50px", display: "flex", justifyContent: "flex-start", height: "75px"}}>
+        <Title style={{color: "#D63D19", fontSize: "6em", textShadow: "2px 2px #FFFF", marginTop: "25px"}}>WellDone</Title>
       </Col>
-      <Col span={24} offset={3}>
-        <Form onSubmit={handleSubmit} style={{ maxWidth: "280px" }}>
+      <Col span={24} style={{ marginBottom: "20px" , display: "flex", justifyContent: "center"}}>
+        {/* <Title style={{color: "white"}}>Sign In</Title> */}
+      </Col>
+      <Col span={24} style={{display: "flex", justifyContent: "center", alignItems: "center", marginTop: "12%"}}>
+        <Form onSubmit={handleSubmit} style={{ maxWidth: "280px" , border: "5px solid white", padding: "50px"}}>
           <Form.Item>
             <Input
               prefix={<Icon type="mail" style={{ color: "rgba(0,0,0,.25)" }} />}
@@ -58,7 +61,7 @@ const SignIn = props => {
             />
           </Form.Item>
           <Form.Item>
-            <Button type="primary" htmlType="submit" style={{ width: "100%" }}>
+            <Button type="primary" htmlType="submit" style={{ width: "100%", backgroundColor: "#D63D19", border: "1px solid #D63D19", fontWeight: "700"}}>
               Sign In
             </Button>
           </Form.Item>
