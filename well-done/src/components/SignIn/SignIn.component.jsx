@@ -8,7 +8,7 @@ const { Title } = Typography;
 
 const SignIn = props => {
   // console.log('props in SignIn', props)
-  const [account, setAccount] = useState({ email_address: "", password: "" });
+  const [account, setAccount] = useState({ email_address: "admin@email", password: "password" });
 
   const handleChange = event => {
     setAccount({ ...account, [event.target.name]: event.target.value });
@@ -45,6 +45,7 @@ const SignIn = props => {
               placeholder="Email"
               value={account.email_address}
               onChange={handleChange}
+              defaultValue="admin@emails"
             />
           </Form.Item>
           <Form.Item>
@@ -55,6 +56,7 @@ const SignIn = props => {
               placeholder="Password"
               value={account.password}
               onChange={handleChange}
+              defaultValue="password"
             />
           </Form.Item>
           <Form.Item>
