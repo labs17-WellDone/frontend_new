@@ -24,7 +24,7 @@ const Dashboard = props => {
 
     useEffect(() => {
         AxiosWithAuth()
-          .get("https://welldone-db.herokuapp.com/api/sensors/recent")
+          .get("https://welldone-server.herokuapp.com/api/sensors/recent")
           .then(res => {
             console.log("get all sensors in Map", res.data);
             // props.setSensors(res.data);
@@ -37,7 +37,7 @@ const Dashboard = props => {
 
     useEffect(() => {
         AxiosWithAuth()
-          .get("https://welldone-db.herokuapp.com/api/history")
+          .get("https://welldone-server.herokuapp.com/api/history")
           .then(res => {
             //console.log("history from app.js", res.data);
             setHistory(res.data);

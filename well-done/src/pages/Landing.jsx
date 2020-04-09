@@ -12,23 +12,9 @@ const Landing = props => {
   console.log("props in Landing", props);
 
   return (
-    <Row
-      type="flex"
-      justify="space-around"
-      align="middle"
-      style={{ backgroundColor: "#E5E5E5" }}
-    >
-      <Col span={18}>
-        <img
-          src={image}
-          alt="main image"
-          style={{ width: "100%", height: "auto" }}
-        />
-      </Col>
-      <Col span={6} style={{ minWidth: "380px" }}>
+    <div className="landing">
         <SignIn history={props.history} />
-      </Col>
-    </Row>
+    </div>
   );
 };
 

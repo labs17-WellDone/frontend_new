@@ -1,14 +1,16 @@
 import React, { useState } from "react";
+import axios from "axios";
 import axiosWithAuth from "../AxiosWithAuth/axiosWithAuth.jsx";
 import "../../pages/Settings/Settings.scss";
 import { Button, Form } from "react-bootstrap";
 
-const EditPasswordForm = props => {
+const EditEmailForm = props => {
+  // console.log('props in SignIn', props)
   const [account, setAccount] = useState({
     email_address: "",
     password: "",
-    new_password: "",
-    new_password_conf: ""
+    new_email: "",
+    new_email_conf: ""
   });
 
   const handleChange = event => {
@@ -17,12 +19,12 @@ const EditPasswordForm = props => {
 
   const handleSubmit = event => {
     event.preventDefault();
-    console.log(account.new_password);
-    // Checking if new password matches new password confirmation
-    if (account.new_password != account.new_password_conf) {
-      alert("New password information must match");
+    console.log(account.new_email);
+    if (account.new_email != account.new_email_conf) {
+      //display mismatching error message
+      //get html ref or id and update its txt to alert user?
       axiosWithAuth()
-        .get("https://welldone-server.herokuapp.com/api/accounts/")
+        .get("https://welldone-db.herokuapp.com/api/accounts/")
         .then(res => {
           console.log("res", res.data);
         })
@@ -32,25 +34,20 @@ const EditPasswordForm = props => {
     } else {
       console.log("submit", account);
 
-      const emailPassword = {
-        email_address: account.email_address,
-        password: account.password
-      };
-
-      console.log(emailPassword);
-      isValidUserCredential(emailPassword).then(res => {
-        console.log("response line", res);
+      // make sure correct username + password is input
+      isValidUserCredential(account).then(res => {
+        // console.log("response line", res);
       });
     }
   };
 
   async function isValidUserCredential(account) {
     axiosWithAuth()
-      .post("https://welldone-server.herokuapp.com/api/auth/login", account)
+      .post("https://welldone-db.herokuapp.com/api/auth/login", account)
       .then(res => {
         console.log("res", res.data);
         getUserData(res.data.id);
-        localStorage.setItem("userId", res.data.id);
+        localStorage.setItem("userId", res.data.id); // may not wanna save
         return true;
       })
       .catch(err => {
@@ -61,13 +58,13 @@ const EditPasswordForm = props => {
 
   const getUserData = accountID => {
     axiosWithAuth()
-      .get("https://welldone-server.herokuapp.com/api/accounts/" + accountID)
+      .get("https://welldone-db.herokuapp.com/api/accounts/" + accountID)
       .then(res => {
         console.log("res", res.data);
-        // var temp = res.data;
-        // temp.email_address = account.email_address;
-        // temp.password = account.new_password;
-        updateUserData(account.new_password, accountID);
+        var temp = res.data;
+        temp.password = account.password;
+        temp.email_address = account.new_email_conf;
+        updateUserData(temp, accountID);
       })
       .catch(err => {
         console.log(err);
@@ -75,16 +72,15 @@ const EditPasswordForm = props => {
   };
 
   const updateUserData = (newData, accountID) => {
-    console.log("update user data");
     console.log(newData, accountID);
     axiosWithAuth()
       .put(
-        "https://welldone-server.herokuapp.com/api/accounts/password" + accountID,
+        "https://welldone-db.herokuapp.com/api/accounts/" + accountID,
         newData
       )
       .then(res => {
         console.log("res", res.data);
-        localStorage.setItem("userId", res.data.id);
+        localStorage.setItem("userId", res.data.id); // may not wanna save
         return true;
       })
       .catch(err => {
@@ -94,18 +90,17 @@ const EditPasswordForm = props => {
   };
 
   return (
-    <div className="form-container-password">
-      <div className="form-wrap-password">
-        <h1 className="update-header"> Change Password</h1>
+    <div className="form-container-email">
+      <div className="form-wrap-email">
+        <h1 className="update-header"> Change Email </h1>
       </div>
       <div>
         <div className="edit-form">
-          <div className="mobile-header">Change Password </div>
           <Form onSubmit={handleSubmit}>
             {/* Email input  */}
             <Form.Group className="email-row">
               <Form.Group className="form-group">
-                <Form.Label>Email </Form.Label>
+                <Form.Label className="form-label">Email </Form.Label>
                 <Form.Control
                   className="input"
                   type="email"
@@ -127,35 +122,38 @@ const EditPasswordForm = props => {
               </Form.Group>
             </Form.Group>
 
-            {/* New password input  */}
+            {/* New name input  */}
             <Form.Group className="row-2">
               <Form.Group className="form-group">
-                <Form.Label>New Password</Form.Label>
+                <Form.Label>New Email</Form.Label>
                 <Form.Control
                   className="input"
-                  type="password"
-                  name="new_password"
-                  value={account.new_password}
+                  type="email"
+                  name="new_email"
+                  value={account.new_email}
                   onChange={handleChange}
                 />
               </Form.Group>
-              {/* Confirm new password input  */}
+              {/* Confirm new name input  */}
               <Form.Group className="form-group">
-                <Form.Label className="confirm-password-label">
-                  Confirm New Password
-                </Form.Label>
+                <Form.Label>Confirm New Email</Form.Label>
                 <Form.Control
                   className="input"
-                  type="password"
-                  name="new_password_conf"
-                  value={account.new_password_conf}
+                  type="email"
+                  name="new_email_conf"
+                  value={account.new_email_conf}
                   onChange={handleChange}
                 />
               </Form.Group>
             </Form.Group>
 
-            <Button variant="primary" type="submit" className="update-btn">
-              <div className="btn-text-password">Change Password</div>
+            <Button
+              id="name"
+              variant="primary"
+              type="submit"
+              className="update-btn"
+            >
+              <div className="btn-text">Change Email</div>
             </Button>
           </Form>
         </div>
@@ -164,4 +162,4 @@ const EditPasswordForm = props => {
   );
 };
 
-export default EditPasswordForm;
+export default EditEmailForm;
