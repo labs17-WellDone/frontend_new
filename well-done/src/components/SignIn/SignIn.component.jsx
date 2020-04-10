@@ -39,7 +39,7 @@ const SignIn = props => {
         {/* <Title style={{color: "white"}}>Sign In</Title> */}
       </Col>
       <Col span={24} style={{display: "flex", justifyContent: "center", alignItems: "center", marginTop: "12%"}}>
-        <Form onSubmit={handleSubmit} style={{ maxWidth: "280px" , border: "5px solid white", padding: "50px"}}>
+        <Form onSubmit={handleSubmit} style={{ maxWidth: "280px" , border: "5px solid white", borderRadius: "15px", backgroundColor: "white", padding: "50px"}}>
           <Form.Item>
             <Input
               prefix={<Icon type="mail" style={{ color: "rgba(0,0,0,.25)" }} />}
