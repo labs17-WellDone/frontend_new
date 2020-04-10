@@ -187,7 +187,7 @@ const MonitorDetails = props => {
             mapboxApiAccessToken={
               "pk.eyJ1IjoiaHRyYW4yIiwiYSI6ImNrMmdmeWM2dDB1amkzY3AwNWgwNHRteXUifQ.jG0OQ6bMhr-sZYMkdj3H6w"
             }
-            mapStyle="mapbox://styles/htran2/ck2gg912i09dt1cnhtuu1ar2u"
+            mapStyle="mapbox://styles/htran2/ck2gg912i09dt1cnhtuu1ar2u?optimize=true"
             onViewportChange={viewport => {
               setViewport(viewport);
             }}
